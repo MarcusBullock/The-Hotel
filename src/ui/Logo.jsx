@@ -4,6 +4,15 @@ const StyledLogo = styled.div`
     text-align: center;
 `;
 
+const StyledSpan = styled.span`
+    text-align: center;
+    font-family: "Playwrite AU TAS", cursive;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 600;
+    color: #27492e;
+`;
+
 const Img = styled.img`
     height: 9.6rem;
     width: auto;
@@ -11,9 +20,12 @@ const Img = styled.img`
 
 function Logo() {
     return (
-        <StyledLogo>
-            <Img src="/logo-light.png" alt="Logo" />
-        </StyledLogo>
+        <StyledSpan>
+            <StyledLogo>
+                <Img src="/logo-dark-1.png" alt="Logo" />
+            </StyledLogo>
+            <span>The Hotel Company</span>
+        </StyledSpan>
     );
 }
 
