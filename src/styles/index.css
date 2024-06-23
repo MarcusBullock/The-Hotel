@@ -115,6 +115,10 @@ input:disabled {
     color: var(--color-grey-500);
 }
 
+input {
+    outline: 1px solid var(--color-grey-500);
+}
+
 input:focus,
 button:focus,
 textarea:focus,

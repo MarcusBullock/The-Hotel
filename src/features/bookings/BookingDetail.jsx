@@ -9,44 +9,68 @@ import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
+import { useBooking } from "./useBooking";
+import Spinner from "../../ui/Spinner";
+import { useNavigate } from "react-router-dom";
+import { HiArrowUpOnSquare } from "react-icons/hi2";
+import { useCheckout } from "../check-in-out/useCheckout";
 
 const HeadingGroup = styled.div`
-  display: flex;
-  gap: 2.4rem;
-  align-items: center;
+    display: flex;
+    gap: 2.4rem;
+    align-items: center;
 `;
 
 function BookingDetail() {
-  const booking = {};
-  const status = "checked-in";
+    const { isLoading, booking } = useBooking();
+    const { checkout, isCheckingOut } = useCheckout();
+    const moveBack = useMoveBack();
+    const navigate = useNavigate();
 
-  const moveBack = useMoveBack();
+    if (isLoading || isCheckingOut) return <Spinner />;
 
-  const statusToTagName = {
-    unconfirmed: "blue",
-    "checked-in": "green",
-    "checked-out": "silver",
-  };
+    const { status, id: bookingId } = booking;
 
-  return (
-    <>
-      <Row type="horizontal">
-        <HeadingGroup>
-          <Heading as="h1">Booking #X</Heading>
-          <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
-        </HeadingGroup>
-        <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
-      </Row>
+    const statusToTagName = {
+        unconfirmed: "blue",
+        "checked-in": "green",
+        "checked-out": "silver",
+    };
 
-      <BookingDataBox booking={booking} />
+    return (
+        <>
+            <Row type="horizontal">
+                <HeadingGroup>
+                    <Heading as="h1">Booking #{bookingId}</Heading>
+                    <Tag type={statusToTagName[status]} size={1.5}>
+                        {status.replace("-", " ")}
+                    </Tag>
+                </HeadingGroup>
+                <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
+            </Row>
 
-      <ButtonGroup>
-        <Button variation="secondary" onClick={moveBack}>
-          Back
-        </Button>
-      </ButtonGroup>
-    </>
-  );
+            <BookingDataBox booking={booking} />
+            <ButtonGroup>
+                {status === "unconfirmed" && (
+                    <Button onClick={() => navigate(`/checkin/${bookingId}`)}>
+                        Check in
+                    </Button>
+                )}
+
+                {status === "checked-in" && (
+                    <Button
+                        icon={<HiArrowUpOnSquare />}
+                        onClick={() => checkout(bookingId)}
+                    >
+                        Check out
+                    </Button>
+                )}
+                <Button variation="secondary" onClick={moveBack}>
+                    Back
+                </Button>
+            </ButtonGroup>
+        </>
+    );
 }
 
 export default BookingDetail;
