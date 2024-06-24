@@ -34,7 +34,7 @@ function Logo() {
     return (
         <StyledSpan>
             <StyledLogo>
-                <Img src="/logo-dark-1.png" alt="Logo" />
+                <Img src="/logo.png" alt="Logo" />
             </StyledLogo>
             {isDarkMode ? (
                 <DarkModeText>{COMPANY_NAME}</DarkModeText>
