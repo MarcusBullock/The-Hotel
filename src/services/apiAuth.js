@@ -18,13 +18,9 @@ export async function signup({ fullName, email, password }) {
 }
 
 export async function login({ email, password }) {
-    // Ignore authentication and allow any visitors to view website
-    // as this is a demo application
-    const passwordHardcoded = import.meta.env.VITE_PASSWORD;
-    const emailHardcoded = import.meta.env.VITE_LOGIN;
     const { data, error } = await supabase.auth.signInWithPassword({
-        emailHardcoded,
-        passwordHardcoded,
+        email,
+        password,
     });
 
     if (error) throw new Error(error.message);
