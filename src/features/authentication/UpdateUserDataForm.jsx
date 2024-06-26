@@ -8,7 +8,6 @@ import Input from "../../ui/Input";
 
 import { useUser } from "./useUser";
 import { useUpdateUser } from "./useUpdateUser";
-import Spinner from "../../ui/Spinner";
 
 function UpdateUserDataForm() {
     const {
@@ -23,12 +22,9 @@ function UpdateUserDataForm() {
     const [fullName, setFullName] = useState(currentFullName);
     const [avatar, setAvatar] = useState(null);
 
-    if (isUpdating) return <Spinner />;
-
     function handleSubmit(e) {
         e.preventDefault();
         if (!fullName) return;
-
         updateUser(
             { fullName, avatar },
             {
@@ -50,23 +46,26 @@ function UpdateUserDataForm() {
             <FormRow label="Email address">
                 <Input value={email} disabled />
             </FormRow>
+
             <FormRow label="Full name">
                 <Input
                     type="text"
-                    disabled={isUpdating}
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     id="fullName"
+                    disabled={isUpdating}
                 />
             </FormRow>
+
             <FormRow label="Avatar image">
                 <FileInput
                     id="avatar"
-                    disabled={isUpdating}
                     accept="image/*"
                     onChange={(e) => setAvatar(e.target.files[0])}
+                    disabled={isUpdating}
                 />
             </FormRow>
+
             <FormRow>
                 <Button
                     type="reset"

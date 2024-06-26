@@ -52,7 +52,6 @@ function CheckinBooking() {
         isPaid,
     } = booking;
 
-    console.log(settings);
     const optionalBreakfastPrice =
         settings.breakfastPrice * numNights * numGuests;
 

@@ -26,15 +26,13 @@ function UserAvatar() {
     const { user, isLoading } = useUser();
     if (isLoading) return <Spinner />;
 
-    const { fullName, avatar } = user.user_metadata;
-
     return (
         <StyledUserAvatar>
             <Avatar
-                src={avatar || "default-user.jpg"}
-                alt={`Avatar of ${fullName}`}
+                src={user?.user_metadata.avatar || "default-user.jpg"}
+                alt={`Avatar of ${user?.user_metadata.fullName}`}
             />
-            <span>{fullName}</span>
+            <span>{user?.user_metadata.fullName}</span>
         </StyledUserAvatar>
     );
 }

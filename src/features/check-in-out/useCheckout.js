@@ -18,7 +18,6 @@ export function useCheckout() {
         },
 
         onError: (error) => {
-            console.log(error);
             toast.error("There was an error while checking out");
         },
     });

@@ -23,7 +23,6 @@ export function useCheckin() {
         },
 
         onError: (error) => {
-            console.log(error);
             toast.error("There was an error while checking in");
         },
     });
