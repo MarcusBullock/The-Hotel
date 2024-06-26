@@ -17,7 +17,7 @@ export function useCheckout() {
             });
         },
 
-        onError: (error) => {
+        onError: () => {
             toast.error("There was an error while checking out");
         },
     });

@@ -22,7 +22,7 @@ export function useCheckin() {
             navigate("/bookings");
         },
 
-        onError: (error) => {
+        onError: () => {
             toast.error("There was an error while checking in");
         },
     });
